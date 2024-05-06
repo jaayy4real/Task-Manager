@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const session = require("express-session");
 const authRoutes = require('./routes/authentication.route');
+const taskRoutes = require('./routes/task.route');
 const app = express();
 
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(session({
 }))
 
 app.use("/api/auth", authRoutes);
+app.use("/api/task", taskRoutes);
 
 mongoose.connect("mongodb+srv://ekpojeffrey:mary4jeffrey@taskmanager.vgvdnsz.mongodb.net/TaskManager?retryWrites=true&w=majority&appName=TaskManager")
 .then(() => {
