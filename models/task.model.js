@@ -22,6 +22,10 @@ const taskSchema = new mongoose.Schema({
     creator:{
         type: mongoose.Schema.Types.ObjectId, ref:'User', required:true
     },
+    creatorName:{
+        type: String,
+        required: [true, 'Creator name is required'],
+    }
 
 },{
     timestamps: true

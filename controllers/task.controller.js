@@ -1,17 +1,20 @@
 const Task = require('../models/task.model.js');
+const User = require('../models/user.model.js');
 
 const createTask = async (req, res) => {
     const { title, description, dueDate, priority, status  } = req.body;
 
     if(req.session && req.session.userId){
         try {
+            const user = await User.findById(req.session.userId);
             const task = new Task({
                 title,
                 description,
                 dueDate,
                 priority,
                 status,
-                creator: req.session.userId
+                creator: user._id,
+                creatorName: user.username
             })
             await task.save();
             res.send('Task created successfully');

@@ -30,6 +30,7 @@ const login = async (req, res) => {
         const user = await User.findOne({ username }); // Finding the user in the database
         if (user && await bcrypt.compare(password, user.password)) { // Comparing passwords
             req.session.userId = user._id; // Storing user ID in session
+            req.session.userName = user.username
             res.send('Login successful');
         } else {
             res.status(401).send('Invalid username or password');
